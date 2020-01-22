@@ -1,19 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <h1>Football</h1>
 
 </head>
 <body>
 <div>
-    <#list table as table>
-        <div>
-            <span>${table.name}</span>
-            <span>${table.win}</span>
-            <span>${table.draw}</span>
-            <span>${table.lose}</span>
-        </div>
-    </#list>
+    <span><a href="/addtour">Добавить турнир</a> </span>
+</div>
+<div>
+    <span><a href="/add">Добавить команду</a></span>
+</div>
+<div>
 
 </div>
 </body>

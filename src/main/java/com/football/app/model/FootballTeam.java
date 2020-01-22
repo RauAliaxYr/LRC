@@ -35,6 +35,13 @@ public class FootballTeam {
     )
   private List<FootballTournament> tournamentList;
 
+    public FootballTeam(String name) {
+        this.name = name;
+    }
+
+    public FootballTeam() {
+    }
+
     public Long getId() {
         return id;
     }

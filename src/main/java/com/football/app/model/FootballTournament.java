@@ -16,9 +16,17 @@ public class FootballTournament {
     private Date startData;
     private Date endData;
     private Boolean isActive;
+    private String logoTour;
 
     @ManyToMany(mappedBy = "tournamentList")
     private List<FootballTeam> footballTeams;
+
+    public FootballTournament() {
+    }
+
+    public FootballTournament(String name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
@@ -66,5 +74,13 @@ public class FootballTournament {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLogoTour() {
+        return logoTour;
+    }
+
+    public void setLogoTour(String logoTour) {
+        this.logoTour = logoTour;
     }
 }

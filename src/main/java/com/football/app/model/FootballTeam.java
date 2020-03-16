@@ -22,7 +22,7 @@ public class FootballTeam {
     joinColumns = {@JoinColumn(name = "team_id")},
     inverseJoinColumns = {@JoinColumn(name = "match_id")}
     )
-    private List<FootballMatch> matches;
+    private List<FootballMatch> teamMatches;
 
   @ManyToMany(mappedBy = "teams")
     private List<FootballPlayer> footballPlayers;

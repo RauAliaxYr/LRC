@@ -7,7 +7,6 @@ import java.util.List;
 @Entity
 public class FootballTournament {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -17,6 +16,14 @@ public class FootballTournament {
     private Date endData;
     private Boolean isActive;
     private String logoTour;
+    private String spec;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "tournament_matches",
+            joinColumns = {@JoinColumn(name = "tour_id")},
+            inverseJoinColumns = {@JoinColumn(name = "match_id")}
+    )
+    private List<FootballMatch> tourMatches;
 
     @ManyToMany(mappedBy = "tournamentList")
     private List<FootballTeam> footballTeams;
@@ -82,5 +89,21 @@ public class FootballTournament {
 
     public void setLogoTour(String logoTour) {
         this.logoTour = logoTour;
+    }
+
+    public String getSpec() {
+        return spec;
+    }
+
+    public void setSpec(String spec) {
+        this.spec = spec;
+    }
+
+    public List<FootballMatch> getTourMatches() {
+        return tourMatches;
+    }
+
+    public void setTourMatches(List<FootballMatch> tourMatches) {
+        this.tourMatches = tourMatches;
     }
 }

@@ -1,9 +1,8 @@
 package com.football.app.controller;
 
-import com.football.app.model.FootballTournament;
-import com.football.app.repos.TeamsRepo;
-import com.football.app.repos.TournamentsRepo;
-import com.football.app.service.LogoService;
+import com.football.app.model.FootballTeam;
+import com.football.app.service.DateService;
+import com.football.app.service.TournamentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,43 +12,43 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.List;
 
 @Controller
-@RequestMapping("/addtour")
+
 public class TournamentsController {
 
-    private final TournamentsRepo tournamentsRepo;
-    private final TeamsRepo teamsRepo;
-    private final LogoService logoService;
+    private final TournamentService tournamentService;
 
-    public TournamentsController(TeamsRepo teamsRepo,TournamentsRepo tournamentsRepo,LogoService logoService) {
-        this.teamsRepo = teamsRepo;
-        this.tournamentsRepo = tournamentsRepo;
-        this.logoService = logoService;
+    public TournamentsController(TournamentService tournamentService) {
+        this.tournamentService = tournamentService;
     }
 
-    @GetMapping
-    public String kek(Model model){
 
-        model.addAttribute("teams",teamsRepo.findAll());
+    @GetMapping("/addtour")
+    public String teamList(Model model) {
 
+        model.addAttribute("teams", tournamentService.teamsList());
         return "addtour";
     }
 
-    @PostMapping
+    @PostMapping("/addtour")
     public String addTournament(
             @RequestParam String tourName,
             @RequestParam("file") MultipartFile tournamentLogo,
+            @RequestParam("startData") String startDate,
+            @RequestParam("endDate") String endDate,
+            @RequestParam("specification") String spec,
+            @RequestParam(value = "teamsList",required = false) List<FootballTeam> teamList,
             Model model
-    ) throws IOException {
+    ) throws IOException, ParseException {
 
-        FootballTournament tournament = new FootballTournament(tourName);
+        tournamentService.creat(tourName,tournamentLogo,startDate,endDate,spec,teamList);
 
-            tournament.setLogoTour(logoService.logo(tournamentLogo));
-
-        tournamentsRepo.save(tournament);
-
-        return "redirect:/addtour";
+        return "redirect:/tournaments";
     }
+
+
 
 }

@@ -11,13 +11,20 @@ public class FootballMatch {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
-    @ManyToMany(mappedBy = "matches")
+    @ManyToMany(mappedBy = "teamMatches")
     private List<FootballTeam> teams;
+
+    @ManyToMany(mappedBy = "tourMatches")
+    private List<FootballTournament> tournaments;
 
     private Date date;
     private Integer teamAGoal;
     private Integer teamBGoal;
+
+    public FootballMatch(List<FootballTeam> teams, Date date) {
+        this.teams = teams;
+        this.date = date;
+    }
 
     public Long getId() {
         return id;

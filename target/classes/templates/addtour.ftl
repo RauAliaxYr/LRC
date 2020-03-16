@@ -6,9 +6,12 @@
 </head>
 <body>
 <div>
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" id="add tour">
         <div>
             <input type="text"  name="tourName" placeholder="Введите название турнира">
+            <input type="date" name="startData" placeholder="Введите дату начала">
+            <input type="date" name="endDate" placeholder="Введите дату окончания">
+            <input type="text" name="specification" placeholder="Введите описание турнира">
         </div>
 
         <div>

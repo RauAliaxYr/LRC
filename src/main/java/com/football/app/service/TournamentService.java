@@ -51,7 +51,7 @@ public class TournamentService {
             tournament.setActive(true);
         }else {tournament.setActive(false);}
 
-        tournamentsRepo.save(tournament);
+        save(tournament);
     }
 
     public List<FootballTeam> teamsList() {
@@ -62,6 +62,10 @@ public class TournamentService {
     public List<FootballTournament> tourList() {
         List<FootballTournament> tournaments = tournamentsRepo.findAll();
         return tournaments;
+    }
+    public void save(FootballTournament footballTournament){
+
+        tournamentsRepo.save(footballTournament);
     }
 
 }
